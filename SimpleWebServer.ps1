@@ -24,14 +24,14 @@ function RunWebServer
                     $res.statuscode = 404
                     $content = [text.encoding]::utf8.getbytes("not found")
                 }
+                write-host "$($req.RemoteEndPoint) $($req.HttpMethod) $($req.url.localpath) $($res.statuscode)"
                 $res.outputstream.write($content, 0, $content.length)
                 $res.close()
             }
         }
-        catch
+        finally
         {
             $listener.stop()
-            throw
         }
     }
     catch
