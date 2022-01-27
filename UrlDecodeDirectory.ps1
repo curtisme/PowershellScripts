@@ -2,5 +2,9 @@ Add-Type -AssemblyName System.Web
 
 foreach ($thing in ls)
 {
-    mv $thing.name ([System.Web.HttpUtility]::UrlDecode($thing.Name))
+    $newName = [System.Web.HttpUtility]::UrlDecode($thing.Name)
+    if ($thing.name -ne $newName)
+    {
+        mv $thing.name $newName
+    }
 }
